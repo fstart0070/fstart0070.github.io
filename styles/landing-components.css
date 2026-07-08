@@ -1,0 +1,633 @@
+/* ===========================================================================
+ *  Button
+ * =========================================================================== */
+
+.landing-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 46px;
+  padding: 0 22px;
+  border-radius: var(--r-pill);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--dur-fast) var(--ease-out),
+    filter var(--dur-fast), box-shadow var(--dur-base);
+  white-space: nowrap;
+}
+
+.landing-btn:hover {
+  transform: translateY(-1px);
+}
+
+.landing-btn--primary {
+  background: var(--grad-sun);
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.30),
+    0 1px 0 rgba(255, 255, 255, 0.18) inset;
+}
+
+.landing-btn--primary:hover {
+  filter: brightness(1.06);
+  color: #ffffff;
+  box-shadow: 0 12px 32px rgba(16, 185, 129, 0.42),
+    0 1px 0 rgba(255, 255, 255, 0.18) inset;
+}
+
+.landing-btn--primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 70%
+  );
+  background-size: 220% 100%;
+  background-position: -100% 0;
+  transition: background-position 600ms var(--ease-out);
+  pointer-events: none;
+}
+
+.landing-btn--primary:hover::before {
+  background-position: 200% 0;
+}
+
+.landing-btn--ghost {
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--c-text);
+  border: 1px solid var(--c-border-strong);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.landing-btn--ghost:hover {
+  background: rgba(16, 185, 129, 0.06);
+  border-color: var(--c-cyan);
+  color: #047857;
+}
+
+.landing-btn--sm {
+  height: 36px;
+  padding: 0 16px;
+  font-size: 0.85rem;
+}
+
+.landing-btn--lg {
+  height: 54px;
+  padding: 0 28px;
+  font-size: 1rem;
+}
+
+.landing-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--dur-fast);
+}
+
+.landing-btn:hover svg {
+  transform: translateX(2px);
+}
+
+/* ===========================================================================
+ *  Glass Card
+ * =========================================================================== */
+
+.landing-card {
+  position: relative;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+  padding: var(--space-5);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: var(--glow-card);
+  transition: border-color var(--dur-base), transform var(--dur-base),
+    background var(--dur-base), box-shadow var(--dur-base);
+  overflow: hidden;
+}
+
+.landing-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    transparent 30%,
+    rgba(16, 185, 129, 0.4) 50%,
+    transparent 70%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur-base);
+}
+
+.landing-card:hover {
+  border-color: var(--c-border-strong);
+  background: var(--c-surface-strong);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(16, 185, 129, 0.12),
+    0 2px 4px rgba(15, 23, 42, 0.04);
+}
+
+.landing-card:hover::before {
+  opacity: 1;
+}
+
+.landing-card--accent::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--grad-sun);
+  opacity: 0.85;
+}
+
+/* ===========================================================================
+ *  Chip / Pill / Badge —— 默认 evergreen 翠绿
+ * =========================================================================== */
+
+.landing-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: var(--r-pill);
+  background: rgba(16, 185, 129, 0.10);
+  border: 1px solid rgba(16, 185, 129, 0.28);
+  color: #047857;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+}
+
+.landing-chip--violet {
+  background: rgba(6, 182, 212, 0.10);
+  border-color: rgba(6, 182, 212, 0.30);
+  color: #0e7490;
+}
+
+.landing-chip--green {
+  background: rgba(13, 148, 136, 0.10);
+  border-color: rgba(13, 148, 136, 0.30);
+  color: var(--c-green);
+}
+
+.landing-chip--amber {
+  background: rgba(180, 83, 9, 0.10);
+  border-color: rgba(180, 83, 9, 0.28);
+  color: var(--c-amber);
+}
+
+.landing-chip--rose {
+  background: rgba(220, 38, 38, 0.08);
+  border-color: rgba(220, 38, 38, 0.26);
+  color: var(--c-rose);
+}
+
+.landing-chip__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor;
+}
+
+/* —— "Live · 实时" 状态 —— */
+.landing-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 8px;
+  border-radius: var(--r-pill);
+  background: rgba(16, 185, 129, 0.10);
+  border: 1px solid rgba(16, 185, 129, 0.36);
+  color: #047857;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.landing-status-pill__dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-cyan);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.8);
+}
+
+.landing-status-pill__dot::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid var(--c-cyan);
+  animation: landing-pulse-ring 1.6s var(--ease-out) infinite;
+}
+
+/* ===========================================================================
+ *  Stat
+ * =========================================================================== */
+
+.landing-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.landing-stat__value {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1;
+  background: var(--grad-sun);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.02em;
+}
+
+.landing-stat__label {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-text-dim);
+}
+
+/* ===========================================================================
+ *  Code / Terminal —— 亮色 IDE 风格
+ *
+ *  设计：浅绿底 #f8fffb + 翠绿描边 + 浅 emerald token 着色，
+ *        与 GitHub Light / Catalina Light 风格对齐。
+ * =========================================================================== */
+
+.landing-code {
+  background: #f8fffb;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  line-height: 1.7;
+  color: var(--c-text);
+  overflow-x: auto;
+  position: relative;
+  box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.04);
+}
+
+.landing-code .tok-cmt    { color: #6b7280; font-style: italic; }
+.landing-code .tok-str    { color: #0e7490; }     /* 青绿，钱字相关 */
+.landing-code .tok-cmd    { color: #047857; font-weight: 600; }
+.landing-code .tok-arg    { color: #0d9488; }
+.landing-code .tok-flag   { color: #b45309; }
+.landing-code .tok-prompt { color: #94a3b8; user-select: none; }
+
+.landing-terminal {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fffb 100%);
+  border: 1px solid var(--c-border-strong);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(16, 185, 129, 0.10),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset,
+    0 0 0 1px rgba(16, 185, 129, 0.04);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.landing-terminal__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--c-border);
+  background: linear-gradient(180deg, rgba(220, 252, 231, 0.55) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.landing-terminal__dots {
+  display: flex;
+  gap: 6px;
+}
+
+.landing-terminal__dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.landing-terminal__dots i:nth-child(1) { background: #ff5f57; }
+.landing-terminal__dots i:nth-child(2) { background: #febc2e; }
+.landing-terminal__dots i:nth-child(3) { background: #28c840; }
+
+.landing-terminal__title {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--c-text-dim);
+  letter-spacing: 0.06em;
+  margin-left: var(--space-3);
+}
+
+.landing-terminal__body {
+  padding: 18px 18px 22px;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  line-height: 1.8;
+  color: var(--c-text);
+  background: #f8fffb;
+}
+
+.landing-terminal__line {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.landing-terminal__caret {
+  display: inline-block;
+  width: 8px;
+  height: 1em;
+  background: var(--c-cyan);
+  margin-left: 4px;
+  vertical-align: -2px;
+  animation: landing-caret-blink 1s steps(2, end) infinite;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+@keyframes landing-caret-blink {
+  50% { opacity: 0; }
+}
+
+/* ===========================================================================
+ *  Tab
+ * =========================================================================== */
+
+.landing-tabs {
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-pill);
+  padding: 4px;
+  gap: 2px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.landing-tabs button {
+  padding: 8px 16px;
+  border-radius: var(--r-pill);
+  font-size: 0.85rem;
+  color: var(--c-text-muted);
+  font-weight: 500;
+  transition: all var(--dur-fast);
+}
+
+.landing-tabs button:hover {
+  color: var(--c-text);
+}
+
+.landing-tabs button.is-active {
+  background: rgba(16, 185, 129, 0.14);
+  color: #047857;
+  font-weight: 600;
+}
+
+/* ===========================================================================
+ *  Agent card —— 业务岗位卡
+ * =========================================================================== */
+
+.landing-agent-card {
+  position: relative;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-lg);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  cursor: default;
+  transition: all var(--dur-base) var(--ease-out);
+  overflow: hidden;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--glow-card);
+}
+
+.landing-agent-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--agent-tone, var(--c-cyan)),
+    transparent
+  );
+  opacity: 0.85;
+}
+
+.landing-agent-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    600px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(16, 185, 129, 0.08),
+    transparent 40%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur-base);
+}
+
+.landing-agent-card:hover {
+  border-color: var(--c-border-strong);
+  transform: translateY(-4px);
+  background: var(--c-surface-strong);
+  box-shadow: 0 16px 40px rgba(16, 185, 129, 0.14),
+    0 1px 0 rgba(255, 255, 255, 0.6) inset;
+}
+
+.landing-agent-card:hover::after {
+  opacity: 1;
+}
+
+.landing-agent-card__head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.landing-agent-card__icon {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--r-md);
+  background: color-mix(in srgb, var(--agent-tone, var(--c-cyan)) 12%, white);
+  border: 1px solid color-mix(in srgb, var(--agent-tone, var(--c-cyan)) 32%, transparent);
+  display: grid;
+  place-items: center;
+  color: var(--agent-tone, var(--c-cyan));
+  position: relative;
+}
+
+.landing-agent-card__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.landing-agent-card__icon::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  border: 1px solid var(--agent-tone, var(--c-cyan));
+  opacity: 0;
+  transition: opacity var(--dur-base), transform var(--dur-base);
+}
+
+.landing-agent-card:hover .landing-agent-card__icon::after {
+  opacity: 0.5;
+  transform: scale(1.1);
+}
+
+.landing-agent-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.landing-agent-card__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--c-text);
+}
+
+.landing-agent-card__codename {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  color: var(--c-text-dim);
+}
+
+.landing-agent-card__desc {
+  font-size: 0.9rem;
+  color: var(--c-text-muted);
+  line-height: 1.7;
+  flex: 1;
+}
+
+.landing-agent-card__io {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px dashed var(--c-border);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+}
+
+.landing-agent-card__io dt {
+  color: var(--c-text-dim);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.landing-agent-card__io dd {
+  margin: 0;
+  color: var(--c-text);
+  word-break: break-word;
+}
+
+.landing-agent-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* ===========================================================================
+ *  Layer banner —— 5 层条
+ * =========================================================================== */
+
+.landing-layer-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--r-md);
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--layer-tone, var(--c-cyan)) 8%, white) 0%,
+    transparent 70%
+  );
+  border-left: 3px solid var(--layer-tone, var(--c-cyan));
+  margin-bottom: var(--space-4);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.landing-layer-bar__index {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--c-text-dim);
+  letter-spacing: 0.18em;
+}
+
+.landing-layer-bar__name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--c-text);
+}
+
+.landing-layer-bar__lead {
+  margin-left: auto;
+  color: var(--c-text-muted);
+  font-size: 0.88rem;
+  max-width: 60%;
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .landing-layer-bar {
+    flex-wrap: wrap;
+    padding: var(--space-3) var(--space-4);
+  }
+  .landing-layer-bar__lead {
+    max-width: 100%;
+    text-align: left;
+    margin-left: 0;
+    flex: 1 0 100%;
+  }
+}
+
+/* ===========================================================================
+ *  Section divider 装饰
+ * =========================================================================== */
+
+.landing-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--c-border-strong), transparent);
+  margin: var(--space-7) 0;
+}

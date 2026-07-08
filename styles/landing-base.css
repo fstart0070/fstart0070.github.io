@@ -1,0 +1,281 @@
+:root {
+  /* —— 背景：evergreen 浅绿 + 白面板 —— */
+  --c-bg-0: #f0fdf6;          /* 与 app --bg-root 完全一致 */
+  --c-bg-1: #ecfdf5;          /* 与 app --bg-elevated 一致 */
+  --c-bg-2: #dcfce7;
+  --c-bg-3: #c7eed8;
+
+  --c-surface: rgba(255, 255, 255, 0.78);   /* 白半透 + backdrop-blur */
+  --c-surface-strong: #ffffff;
+  --c-border: rgba(16, 185, 129, 0.18);     /* 与 app --line 同源 */
+  --c-border-strong: rgba(16, 185, 129, 0.38);
+
+  /* —— 文字：与 app --text-1/2/3 完全一致 —— */
+  --c-text: #1f2937;
+  --c-text-muted: #4b5563;
+  --c-text-dim: #94a3b8;
+
+  /* —— 主色板：与 app --accent / --secondary / --money 同源 —— */
+  --c-cyan: #10b981;          /* 主色：翠绿 evergreen */
+  --c-cyan-soft: #34d399;     /* 嫩绿 hover/soft */
+  --c-violet: #06b6d4;        /* 副色：青色 */
+  --c-violet-soft: #22d3ee;
+  --c-green: #0d9488;         /* money 青绿（数字 / 价格） */
+  --c-green-soft: #14b8a6;
+  --c-amber: #b45309;         /* warn 沉金 */
+  --c-rose: #dc2626;          /* error 红 */
+
+  --c-accent: var(--c-cyan);
+  --c-accent-2: var(--c-violet);
+
+  /* —— 渐变：完全对齐 app --sun-gradient / --sky-gradient —— */
+  --grad-aurora: linear-gradient(
+    135deg,
+    #059669 0%,
+    #10b981 35%,
+    #34d399 65%,
+    #06b6d4 100%
+  );                                                /* 翠绿到青的微彩虹 */
+  --grad-cyan-violet: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
+  --grad-cyan-green: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  --grad-text: linear-gradient(120deg, #1f2937 0%, #059669 60%, #06b6d4 100%);
+  --grad-sun: linear-gradient(135deg, #059669 0%, #10b981 45%, #34d399 100%);
+  --grad-sky: linear-gradient(135deg, #06b6d4 0%, #38bdf8 100%);
+
+  /* —— 阴影 / 光晕：浅底改用淡翠绿光晕（不再霓虹刺眼） —— */
+  --glow-cyan: 0 0 24px rgba(16, 185, 129, 0.22),
+    0 0 64px rgba(16, 185, 129, 0.08);
+  --glow-violet: 0 0 24px rgba(6, 182, 212, 0.20),
+    0 0 64px rgba(6, 182, 212, 0.06);
+  --glow-soft: 0 12px 32px rgba(16, 185, 129, 0.12),
+    0 2px 4px rgba(16, 185, 129, 0.06);
+  --glow-card: 0 1px 2px rgba(15, 23, 42, 0.04),
+    0 8px 24px rgba(16, 185, 129, 0.08);
+
+  /* —— 几何 / 节奏 —— */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+  --r-xl: 22px;
+  --r-pill: 999px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  --container-max: 1240px;
+  --header-h: 64px;
+
+  /* —— 字体：完全对齐 app --font-sans / --font-mono —— */
+  --font-sans: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+    system-ui, -apple-system, sans-serif;
+  --font-display: "Inter", "Space Grotesk", "PingFang SC", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Menlo", "Consolas", ui-monospace, monospace;
+
+  /* —— 动效 —— */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 120ms;
+  --dur-base: 240ms;
+  --dur-slow: 480ms;
+
+  /* —— Z 层级 —— */
+  --z-bg: 0;
+  --z-content: 1;
+  --z-header: 50;
+  --z-drawer: 80;
+  --z-toast: 90;
+  --z-boot: 100;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--c-bg-0);
+  color: var(--c-text);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "tnum" 1, "ss01" 1;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body {
+  background:
+    radial-gradient(1200px 600px at 0% -10%, rgba(52, 211, 153, 0.20), transparent 60%),
+    radial-gradient(1000px 500px at 100% 0%, rgba(6, 182, 212, 0.12), transparent 65%),
+    radial-gradient(900px 600px at 50% 100%, rgba(16, 185, 129, 0.08), transparent 70%),
+    var(--c-bg-0);
+  background-attachment: fixed;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--c-cyan);                    /* evergreen 主色：链接更显眼 */
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+a:hover {
+  color: #047857;                          /* accent-strong 加深 */
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--c-cyan);
+  outline-offset: 3px;
+  border-radius: var(--r-sm);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  margin: 0;
+  color: var(--c-text);
+}
+
+h1 {
+  font-size: clamp(2.4rem, 5.6vw, 4.4rem);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3.6vw, 2.6rem);
+}
+
+h3 {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+}
+
+p {
+  margin: 0;
+  color: var(--c-text-muted);
+}
+
+code,
+pre {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+::selection {
+  background: rgba(16, 185, 129, 0.22);
+  color: #064e3b;
+}
+
+/* —— 滚动条：与 app 同款翠绿 thumb —— */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(16, 185, 129, 0.28);
+  border-radius: var(--r-pill);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 185, 129, 0.5);
+  background-clip: padding-box;
+}
+
+/* —— 工具类 —— */
+.landing-text-grad {
+  background: var(--grad-aurora);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.landing-text-grad--cool {
+  background: var(--grad-cyan-violet);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.landing-mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.landing-only-desktop {
+  display: initial;
+}
+
+.landing-only-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .landing-only-desktop {
+    display: none;
+  }
+  .landing-only-mobile {
+    display: initial;
+  }
+}
+
+/* —— Reduced motion —— */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

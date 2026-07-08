@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f0fdf6" />
+  <meta name="color-scheme" content="light" />
+  <meta name="description" content="chacha · 酒店收益经理的 AI 智能体舰队。盯价 · 拆价 · 比价 · 定价——把一周的报表压缩到 3 秒。" />
+  <meta name="keywords" content="chacha,酒店,房价,价格拆解,智能比价,辅助定价,AI,智能体,Agent" />
+  <meta property="og:title" content="chacha · 让 AI 替你 盯价 · 拆价 · 定价" />
+  <meta property="og:description" content="酒店收益经理的 AI 智能体舰队：17 个智能岗位 5 大业务层，端到端跑通盯价 / 拆价 / 比价 / 定价。" />
+  <meta property="og:type" content="website" />
+
+  <title>chacha · 让 AI 替你 盯价 · 拆价 · 定价</title>
+
+  <link rel="icon" type="image/svg+xml" href="public/landing-favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" />
+
+  <link rel="stylesheet" href="styles/landing-base.css?v=20260615a" />
+  <link rel="stylesheet" href="styles/landing-effects.css?v=20260615a" />
+  <link rel="stylesheet" href="styles/landing-layout.css?v=20260615a" />
+  <link rel="stylesheet" href="styles/landing-components.css?v=20260615a" />
+  <link rel="stylesheet" href="styles/landing-pages.css?v=20260615b" />
+
+  <script>
+    (function () {
+      function applyVp() {
+        var w = window.innerWidth || document.documentElement.clientWidth || 0;
+        var flag = w <= 900 ? "narrow" : "wide";
+        document.documentElement.setAttribute("data-vp", flag);
+        if (document.body) document.body.setAttribute("data-vp", flag);
+      }
+      applyVp();
+      document.addEventListener("DOMContentLoaded", applyVp);
+      window.addEventListener("resize", applyVp, { passive: true });
+    })();
+  </script>
+</head>
+<body>
+  
+  <div class="landing-bg" aria-hidden="true">
+    <div class="landing-bg-grid"></div>
+    <canvas id="landing-bg-canvas" class="landing-bg-canvas"></canvas>
+    <div class="landing-bg-glow landing-bg-glow--cyan"></div>
+    <div class="landing-bg-glow landing-bg-glow--violet"></div>
+    <div class="landing-bg-noise"></div>
+  </div>
+
+  
+  <header id="landing-header" class="landing-header" role="banner"></header>
+
+  
+  <main id="landing-outlet" class="landing-outlet" role="main"></main>
+
+  
+  <footer id="landing-footer" class="landing-footer" role="contentinfo"></footer>
+
+  
+  <div id="landing-boot" class="landing-boot">
+    <div class="landing-boot__ring"></div>
+    <div class="landing-boot__text">booting agent fleet…</div>
+  </div>
+
+  <script type="module" src="scripts/landing-app.js?v=20260615b"></script>
+</body>
+</html>

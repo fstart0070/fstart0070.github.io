@@ -1,0 +1,194 @@
+/* —— 全屏背景容器 —— */
+.landing-bg {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-bg);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* —— 网格底图：极淡的翠绿格，仅作为科技感底纹 —— */
+.landing-bg-grid {
+  position: absolute;
+  inset: -10% -10%;
+  background-image:
+    linear-gradient(rgba(16, 185, 129, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 185, 129, 0.08) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: 0 0;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 35%, #000 25%, transparent 90%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 35%, #000 25%, transparent 90%);
+  animation: landing-grid-pan 60s linear infinite;
+}
+
+@keyframes landing-grid-pan {
+  0% { background-position: 0 0; }
+  100% { background-position: 56px 56px; }
+}
+
+/* —— 粒子网络画布：亮底下用 .65 不透明度避免抢戏 —— */
+.landing-bg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.55;
+}
+
+/* —— 光晕：翠绿 + 青色淡渐变光斑，乘色混合代替屏幕混合 —— */
+.landing-bg-glow {
+  position: absolute;
+  width: 56vmax;
+  height: 56vmax;
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.55;
+  mix-blend-mode: multiply;
+  animation: landing-glow-float 24s var(--ease-in-out) infinite;
+}
+
+.landing-bg-glow--cyan {
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.45), transparent 60%);
+  top: -18vmax;
+  left: -10vmax;
+}
+
+.landing-bg-glow--violet {
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.30), transparent 60%);
+  bottom: -22vmax;
+  right: -10vmax;
+  animation-delay: -8s;
+}
+
+@keyframes landing-glow-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(2vw, -3vh) scale(1.06); }
+  66%      { transform: translate(-1vw, 4vh) scale(0.95); }
+}
+
+/* —— 噪点纹理：亮底下保留极弱质感 —— */
+.landing-bg-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'>\
+<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter>\
+<rect width='160' height='160' filter='url(%23n)' opacity='0.6'/></svg>");
+}
+
+/* —— 性能模式（移动端 / reduce-motion 自动切换：走 .landing-bg--lite） —— */
+.landing-bg--lite .landing-bg-canvas,
+.landing-bg--lite .landing-bg-noise {
+  display: none;
+}
+
+.landing-bg--lite .landing-bg-grid {
+  animation: none;
+}
+
+/* ===========================================================================
+ *  通用动画
+ * =========================================================================== */
+
+@keyframes landing-fade-up {
+  from { opacity: 0; transform: translate3d(0, 24px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes landing-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes landing-pulse-ring {
+  0%   { transform: scale(0.85); opacity: 0.7; }
+  80%  { transform: scale(1.4); opacity: 0; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+@keyframes landing-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes landing-aurora-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+
+.landing-anim-fade-up {
+  animation: landing-fade-up var(--dur-slow) var(--ease-out) both;
+}
+
+.landing-anim-fade-in {
+  animation: landing-fade-in var(--dur-slow) var(--ease-out) both;
+}
+
+/* ===========================================================================
+ *  Boot loader（首屏渲染前的启动层）
+ * =========================================================================== */
+
+.landing-boot {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-boot);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+  background: var(--c-bg-0);
+  transition: opacity 320ms var(--ease-out), visibility 320ms;
+}
+
+.landing-boot--hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.landing-boot__ring {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: var(--c-cyan);          /* 翠绿 */
+  border-right-color: var(--c-violet);      /* 青色 */
+  animation: landing-spin 1.2s linear infinite;
+  box-shadow: var(--glow-cyan);
+}
+
+@keyframes landing-spin {
+  to { transform: rotate(360deg); }
+}
+
+.landing-boot__text {
+  font-family: var(--font-mono);
+  color: var(--c-text-muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* ===========================================================================
+ *  滚动入场（IntersectionObserver 触发 .is-revealed）
+ * =========================================================================== */
+
+.landing-reveal {
+  opacity: 0;
+  transform: translate3d(0, 32px, 0);
+  transition: opacity 720ms var(--ease-out), transform 720ms var(--ease-out);
+}
+
+.landing-reveal.is-revealed {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.landing-reveal[data-reveal-delay="1"] { transition-delay: 80ms; }
+.landing-reveal[data-reveal-delay="2"] { transition-delay: 160ms; }
+.landing-reveal[data-reveal-delay="3"] { transition-delay: 240ms; }
+.landing-reveal[data-reveal-delay="4"] { transition-delay: 320ms; }
+.landing-reveal[data-reveal-delay="5"] { transition-delay: 400ms; }
